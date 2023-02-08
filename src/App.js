@@ -11,18 +11,25 @@
 //   );
 // }
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addEmployee, editEmployee, removeEmployee } from "./features/Employees";
+import { addEmployee, editEmployee, removeEmployee, updateEmployee, filterEmployee } from "./features/Employees";
 
 const App = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [date, setDate ] = useState();
   const [newEmail, setNewEmail] = useState("");
 
   const myEmployees = useSelector((state) => state.employees.value);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch("http://localhost:3000/users")
+    .then(response => response.json())
+    .then(users => dispatch(updateEmployee(users)))
+  },[dispatch])
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -31,6 +38,10 @@ const App = () => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
+
+  const handleDateChange = (e) => {
+    setDate(e.target.value)
+  }
 
   return (
     <div className="employee-dashboard">
@@ -51,6 +62,18 @@ const App = () => {
           Add Employee
         </button>
       </div>
+      <div className="filter-employee">
+      <input
+        value={date}
+        type="input"
+        placeholder="Enter date"
+        onChange={handleDateChange}
+      />
+
+      <button onClick={() => dispatch(filterEmployee({date}))}>
+        Filter Employee
+      </button>
+    </div>
       <div className="display-employee-container">
         {myEmployees.map((employee) => {
           return (

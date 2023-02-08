@@ -1,0 +1,7 @@
+json - data format
+html forms - use kro
+    - form submit - data add
+    update data
+
+filter - data show on click of button filter
+

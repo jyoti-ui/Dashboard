@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { EmployeeDetails } from "../fakedata";
 
 export const employeeSlice = createSlice({
     name : "employees",
-    initialState : { value : EmployeeDetails},
+    initialState : { value : []},
     reducers : {
+        updateEmployee : (state, action) => {
+            state.value = action.payload
+        },
         addEmployee : (state, action ) => {
             state.value.push(action.payload)
         },
@@ -21,9 +23,15 @@ export const employeeSlice = createSlice({
                 }
             return state.value;
             })
+        },
+        filterEmployee : (state, action) => {
+            state.value = state.value.filter(employee => {
+                return employee.date > action.payload.date   
+            }
+            )
         }
     }
 })
 
-export const { addEmployee, editEmployee, removeEmployee } = employeeSlice.actions;
+export const { addEmployee, editEmployee, removeEmployee, updateEmployee, filterEmployee } = employeeSlice.actions;
 export default employeeSlice.reducer;
