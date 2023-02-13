@@ -6,6 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import EmployeesReducer from "./features/Employees/Employees";
 import { BrowserRouter } from "react-router-dom";
+import "./index.css";
 
 const store = configureStore({
   reducer: {

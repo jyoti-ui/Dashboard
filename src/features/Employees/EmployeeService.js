@@ -20,4 +20,9 @@ export const updateEmployeeListApi = async (id, data) => {
     return await httpService.put(url, data)
 }
 
+export const updateDeveloperListApi = async (id, data) => {
+    console.log(data);
+    const url = `${ApiConfig.user}/${id}`
+    return await httpService.put(url, data)
+}
 

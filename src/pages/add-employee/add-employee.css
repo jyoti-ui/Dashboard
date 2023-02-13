@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    width: 50%;
+}
+
+.btn-wrapper {
+    float: right;
+    margin-top: 5%;
+}

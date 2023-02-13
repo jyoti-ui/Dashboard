@@ -1,6 +1,36 @@
 {
   "users": [
     {
+      "id": 1,
+      "name": "Jyoti Singh",
+      "email": "jyoti@graffersid.com",
+      "tech": "NodeJs",
+      "password": "1234",
+      "project": "Kohler",
+      "date": {
+        "9-02-23": {
+          "id": "2",
+          "sod": "This is sod",
+          "eod": "This is eod"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Shubhangi Singh",
+      "email": "Shubhangi@graffersid.com",
+      "tech": "ReactJS",
+      "password": "1234",
+      "project": "Kohler",
+      "date": {
+        "9-02-23": {
+          "id": "3",
+          "sod": "This is sod",
+          "eod": "This is eod"
+        }
+      }
+    },
+    {
       "id": 3,
       "name": "Shivani Rathod",
       "email": "shivani@graffersid.com",
@@ -79,20 +109,6 @@
       "name": "Shubhangi Rathod",
       "email": "shubangi1@gmail.com",
       "tech": "ReactJS",
-      "password": "1234"
-    },
-    {
-      "id": 10,
-      "email": "jyot",
-      "name": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 11,
-      "name": "Jyoti Singh",
-      "email": "jyot5288@gmail.com",
-      "tech": "NodeJs",
       "password": "1234"
     }
   ]
