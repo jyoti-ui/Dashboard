@@ -15,13 +15,12 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  editEmployee,
-  removeEmployee,
   filterEmployee,
   getEmployeeListAction,
   postEmployeeListAction,
-  resetCreateEmployeeStatus
-} from "./features/Employee/Employees";
+  deleteEmployeeListAction,
+  updateEmployeeListAction,
+} from "./features/Employees/Employees";
 
 const App = () => {
   const [name, setName] = useState("");
@@ -32,22 +31,22 @@ const App = () => {
   const [newEmail, setNewEmail] = useState("");
 
   const myEmployees = useSelector((state) => state.employees.value);
-  const {createEmployeeStatus} = useSelector((state) => state.employees);
+  // const {createEmployeeStatus} = useSelector((state) => state.employees);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getEmployeeListAction());
   }, [dispatch]);
 
-  useEffect(() => {
-      if(createEmployeeStatus === "success") {
-        setName('')
-        setEmail('')
-        setTech('')
-        setPassword('')
-        dispatch(resetCreateEmployeeStatus())
-      }
-    }, [dispatch, createEmployeeStatus])
+  // useEffect(() => {
+  //     if(createEmployeeStatus === "success") {
+  //       setName('')
+  //       setEmail('')
+  //       setTech('')
+  //       setPassword('')
+  //       dispatch(resetCreateEmployeeStatus())
+  //     }
+  //   }, [dispatch, createEmployeeStatus])
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -66,6 +65,10 @@ const App = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const handleUpdateEmail = (e) => {
+    setNewEmail(e.target.value);
   };
 
   return (
@@ -97,7 +100,15 @@ const App = () => {
         />
         <button
           onClick={() =>
-            dispatch(postEmployeeListAction({ id: myEmployees.length + 1, name, email, tech, password }))
+            dispatch(
+              postEmployeeListAction({
+                id: myEmployees[myEmployees.length -1].id + 1,
+                name,
+                email,
+                tech,
+                password,
+              })
+            )
           }
         >
           Add Employee
@@ -123,18 +134,28 @@ const App = () => {
               <h2>{employee.email}</h2>
               <input
                 type="input"
-                onChange={(e) => setNewEmail(e.target.value)}
+                onChange={handleUpdateEmail}
                 placeholder="Update Email"
               />
               <button
                 onClick={() =>
-                  dispatch(editEmployee({ id: employee.id, email: newEmail }))
+                  dispatch(
+                    updateEmployeeListAction({
+                      id: employee.id,
+                      email : newEmail,
+                      name,
+                      tech,
+                      password
+                    })
+                  )
                 }
               >
                 Update employee email
               </button>
-              <button
-                onClick={() => dispatch(removeEmployee({ id: employee.id }))}
+              <button 
+                onClick={() =>
+                  dispatch(deleteEmployeeListAction({ id: employee.id }))
+                }
               >
                 Delete employee details
               </button>
@@ -147,5 +168,3 @@ const App = () => {
 };
 
 export default App;
-
- 

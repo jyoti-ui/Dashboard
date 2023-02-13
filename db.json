@@ -1,36 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Jyoti Singh",
-      "email": "jyoti@graffersid.com",
-      "tech": "NodeJs",
-      "password": "1234",
-      "project": "Kohler",
-      "date": {
-        "9-02-23": {
-          "id": "2",
-          "sod": "This is sod",
-          "eod": "This is eod"
-        }
-      }
-    },
-    {
-      "id": 2,
-      "name": "Shubhangi Singh",
-      "email": "Shubhangi@graffersid.com",
-      "tech": "ReactJS",
-      "password": "1234",
-      "project": "Kohler",
-      "date": {
-        "9-02-23": {
-          "id": "3",
-          "sod": "This is sod",
-          "eod": "This is eod"
-        }
-      }
-    },
-    {
       "id": 3,
       "name": "Shivani Rathod",
       "email": "shivani@graffersid.com",
@@ -113,66 +83,17 @@
     },
     {
       "id": 10,
-      "name": "xsadvw",
-      "email": "asdvsf",
-      "tech": "Szdv",
-      "password": "ZCvdfs"
+      "email": "jyot",
+      "name": "",
+      "tech": "",
+      "password": ""
     },
     {
       "id": 11,
-      "name": "Sunil",
-      "email": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 12,
-      "name": "Amit",
-      "email": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 13,
-      "name": "Katy",
-      "email": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 14,
-      "name": "Sunil",
-      "email": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 15,
-      "name": "Amit",
-      "email": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 16,
-      "name": "Sunil",
-      "email": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 17,
-      "name": "Sunil",
-      "email": "",
-      "tech": "",
-      "password": ""
-    },
-    {
-      "id": 18,
-      "name": "Roshni",
-      "email": "",
-      "tech": "",
-      "password": ""
+      "name": "Jyoti Singh",
+      "email": "jyot5288@gmail.com",
+      "tech": "NodeJs",
+      "password": "1234"
     }
   ]
 }
