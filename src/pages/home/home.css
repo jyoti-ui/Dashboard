@@ -27,10 +27,25 @@ table {
   
   td, th {
     border: 3px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 8px;
   }
   
-  tr:nth-child(even) {
+ tbody:nth-child(even) {
     background-color: #dddddd;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .action-btn {
+    width: 30%;
+    padding: 2%;
+  }
+
+  .modal-container {
+    margin: 8% 0;
+    text-align: center;
   }

@@ -27,15 +27,16 @@ export const postEmployeeListAction = createAsyncThunk(
   "users/postEmployeeListAction",
   async (data) => {
     const response = await postEmployeeListApi(data);
+    console.log(response.data)
     return response.data;
   }
 );
 
 export const deleteEmployeeListAction = createAsyncThunk(
   "users/deleteEmployeeListAction",
-  async (data) => {
-    await deleteEmployeeListApi(data.id);
-    return data.id;
+  async (id) => {
+    await deleteEmployeeListApi(id);
+    return id;
   }
 );
 

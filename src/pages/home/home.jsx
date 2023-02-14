@@ -24,23 +24,26 @@ import {
 import "./home.css";
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import Modal from "../../components/modal/modal";
+import { useNavigate } from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
 const Home = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [date, setDate] = useState();
-  const [tech, setTech] = useState("");
-  const [password, setPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [id, setId] = useState();
   const [inputDate, setInputDate] = useState("");
   const [SOD, setSOD] = useState("");
   const [EOD, setEOD] = useState("");
   const [project, setProject] = useState("");
+  const [employeeToView, setEmployeeToView] = useState(null);
 
   const myEmployees = useSelector((state) => state.employees.value);
   // const {createEmployeeStatus} = useSelector((state) => state.employees);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  console.log(employeeToView);
 
   useEffect(() => {
     dispatch(getEmployeeListAction());
@@ -55,29 +58,6 @@ const Home = () => {
   //       dispatch(resetCreateEmployeeStatus())
   //     }
   //   }, [dispatch, createEmployeeStatus])
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
-
-  const handleTechChange = (e) => {
-    setTech(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleProject = (e) => {
-    setProject(e.target.value);
-  };
 
   const handleUpdateEmail = (e) => {
     setNewEmail(e.target.value);
@@ -104,28 +84,72 @@ const Home = () => {
   };
 
   return (
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Technology</th>
-        <th>Password</th>
-        <th>Project</th>
-      </tr>
-      {myEmployees.map(({ id, name, email, tech, password, project }) => {
-        return (
+    <>
+      <table>
+        <thead>
           <tr>
-            <td>{id}</td>
-            <td>{name}</td>
-            <td>{email}</td>
-            <td>{tech}</td>
-            <td>{password}</td>
-            <td>{project}</td>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Technology</th>
+            <th>Password</th>
+            <th>Project</th>
+            <th>Action</th>
           </tr>
-        );
-      })}
-    </table>
+        </thead>
+        {myEmployees.map((employee) => {
+          return (
+            <tbody key={employee.id}>
+              <tr>
+                <td>{employee.id}</td>
+                <td>{employee.name}</td>
+                <td>{employee.email}</td>
+                <td>{employee.tech}</td>
+                <td>{employee.password}</td>
+                <td>{employee.project}</td>
+                <td className="action-buttons">
+                  <Button
+                    type="button"
+                    className="action-btn"
+                    variant="contained"
+                    color="success"
+                    onClick={() => setEmployeeToView(employee)}
+                  > View </Button>
+                  <Button type="button" variant="outlined" className="action-btn" onClick={() => {
+                    navigate(`/update/${employee.id}`)
+                  }}>Update</Button>
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => dispatch(deleteEmployeeListAction(employee.id))}
+                    > Delete</Button>
+                </td>
+              </tr>
+            </tbody>
+          );
+        })}
+      </table>
+      {employeeToView && (
+        <Modal
+          title="Employee details"
+          className="modal"
+          onClose={() => {
+            setEmployeeToView(null);
+          }}
+        >
+          <div className="modal-container">
+            <div>
+              <label>Name : {employeeToView.name}</label>
+            </div>
+            <div>
+              <label>Email : {employeeToView.email}</label>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };
 
