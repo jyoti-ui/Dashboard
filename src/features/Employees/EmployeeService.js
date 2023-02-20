@@ -25,4 +25,3 @@ export const updateDeveloperListApi = async (id, data) => {
     const url = `${ApiConfig.user}/${id}`
     return await httpService.put(url, data)
 }
-

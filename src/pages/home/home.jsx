@@ -26,8 +26,10 @@ import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Modal from "../../components/modal/modal";
 import { useNavigate } from "react-router-dom";
-import DeleteIcon from '@mui/icons-material/Delete';
-import Button from '@mui/material/Button';
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+import Input from "../../components/input/input";
+import SearchBox from "../../components/search-box/search-box";
 
 const Home = () => {
   const [newEmail, setNewEmail] = useState("");
@@ -83,8 +85,19 @@ const Home = () => {
     dispatch(updateDeveloperListAction({ id, inputDate, SOD, EOD }));
   };
 
+  const handleFilterEmployees = () => {};
+
+  const handleEmailChange = () => {};
+
   return (
     <>
+      <div className="search-box">
+        <input
+          value="Filter by email"
+          onChange={handleEmailChange}
+        />
+        <button variant="outlined" onClick={handleFilterEmployees}>Filter</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -114,17 +127,32 @@ const Home = () => {
                     variant="contained"
                     color="success"
                     onClick={() => setEmployeeToView(employee)}
-                  > View </Button>
-                  <Button type="button" variant="outlined" className="action-btn" onClick={() => {
-                    navigate(`/update/${employee.id}`)
-                  }}>Update</Button>
+                  >
+                    {" "}
+                    View{" "}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    className="action-btn"
+                    onClick={() => {
+                      navigate(`/update/${employee.id}`);
+                    }}
+                  >
+                    Update
+                  </Button>
                   <Button
                     type="button"
                     variant="outlined"
                     color="error"
                     startIcon={<DeleteIcon />}
-                    onClick={() => dispatch(deleteEmployeeListAction(employee.id))}
-                    > Delete</Button>
+                    onClick={() =>
+                      dispatch(deleteEmployeeListAction(employee.id))
+                    }
+                  >
+                    {" "}
+                    Delete
+                  </Button>
                 </td>
               </tr>
             </tbody>

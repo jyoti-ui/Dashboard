@@ -122,7 +122,7 @@ export const employeeSlice = createSlice({
       state.updateEmployeeStatus = "Success";
       state.value.map((employee) => {
         if (employee.id === action.payload.id) {
-          employee.email = action.payload.email;
+          employee = action.payload.data;
         }
       return state.value;
     })
@@ -135,11 +135,12 @@ export const employeeSlice = createSlice({
     });
     builder.addCase(updateDeveloperListAction.fulfilled, (state, action) => {
       state.updateEmployeeStatus = "Success";
-      state.value.map((employee) => {
+      let new_value = state.value.map((employee) => {
         if (employee.id === action.payload.id) {
-          employee.date.push(action.payload.date);
+          employee.sod.push({sod : action.payload.sod, date : action.payload.date});
+          employee.eod.push({eod : action.payload.eod, date : action.payload.date});
         }
-      return state.value;
+      return {...state.value, new_value};
     })
   });
     builder.addCase(updateDeveloperListAction.rejected, (state) => {

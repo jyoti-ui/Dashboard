@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./update-employee.css";
 import Input from "../../components/input/input";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,10 +19,19 @@ const UpdateEmployee = () => {
   const [formField, setFormField] = useState(defaultUpdateFormInput);
   const { name, email, tech, password, project } = formField;
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   const dispatch = useDispatch();
+
   const myEmployees = useSelector((state) => state.employees.value);
+
+  useEffect(() => {
+    const employeeToUpdate = myEmployees.filter((employee) => {
+      return employee.id === id;
+    });
+    console.log(employeeToUpdate)
+    setFormField(employeeToUpdate);
+  }, []);
 
   const resetFormFields = () => {
     setFormField(defaultUpdateFormInput);
@@ -49,60 +58,52 @@ const UpdateEmployee = () => {
 
   return (
     <>
-      {myEmployees.map((employee) => {
-        if (id === employee.id) {
-          console.log("Employee matched")
-          setFormField(employee);
-          return (
-            <div className="container">
-              <form className="form" onSubmit={handleSubmit}>
-                <Input
-                  label="Name"
-                  type="text"
-                  value={name}
-                  name="name"
-                  onChange={handleChange}
-                />
-                <Input
-                  label="Email"
-                  type="text"
-                  name="email"
-                  value={email}
-                  onChange={handleChange}
-                />
-                <Input
-                  label="Technology"
-                  type="text"
-                  name="tech"
-                  value={tech}
-                  onChange={handleChange}
-                />
-                <Input
-                  label="Password"
-                  type="text"
-                  name="password"
-                  value={password}
-                  onChange={handleChange}
-                />
-                <Input
-                  label="Project"
-                  type="text"
-                  name="project"
-                  value={project}
-                  onChange={handleChange}
-                />
+      <div className="container">
+        <form className="form" onSubmit={handleSubmit}>
+          <Input
+            label="Name"
+            type="text"
+            value={name}
+            name="name"
+            onChange={handleChange}
+          />
+          <Input
+            label="Email"
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+          <Input
+            label="Technology"
+            type="text"
+            name="tech"
+            value={tech}
+            onChange={handleChange}
+          />
+          <Input
+            label="Password"
+            type="text"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+          <Input
+            label="Project"
+            type="text"
+            name="project"
+            value={project}
+            onChange={handleChange}
+          />
 
-                <div className="btn-wrapper">
-                  <Button type="submit" variant="contained" color="success">
-                    <AddCircleOutlineIcon /> Update Employee
-                  </Button>
-                </div>
-              </form>
-            </div>
-          );
-        }
-        return "Hi";
-      })}
+          <div className="btn-wrapper">
+            <Button type="submit" variant="contained" color="success">
+              <AddCircleOutlineIcon /> Update Employee
+            </Button>
+          </div>
+        </form>
+      </div>
+      );
     </>
   );
 };
